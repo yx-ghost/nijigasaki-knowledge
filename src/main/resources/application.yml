@@ -1,1 +1,8 @@
-server.port: 6975
+server:
+  port: 6975
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/nijigasaki
+    username: root
+    password: yx314159
+    driver-class-name: com.mysql.cj.jdbc.Driver
