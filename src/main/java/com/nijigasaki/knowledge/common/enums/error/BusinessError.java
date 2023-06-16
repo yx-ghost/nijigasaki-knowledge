@@ -13,6 +13,12 @@ public enum BusinessError {
     DATA_NOT_FOUND("1000","数据未找到"),
     PARAM_CAN_NOT_EMPTY("1001","参数不能为空"),
     TIME_FORMAT_ERROR("1002","时间格式转换错误"),
+    /**
+     * redis 相关异常
+     */
+    REDIS_SET_OBJECT_FAILED("1101","redis插入失败"),
+    REDIS_EXPIRE_FAILED("1102","redis设置过期时间失败"),
+    REDIS_GET_DATA_FAILED("1103","redis获取数据失败"),
 
     /**
      * 用户信息相关异常
