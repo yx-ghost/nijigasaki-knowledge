@@ -1,18 +1,21 @@
 package com.nijigasaki.knowledge.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.nijigasaki.knowledge.common.enums.error.BusinessError;
 import com.nijigasaki.knowledge.common.utils.AESUtil;
 import com.nijigasaki.knowledge.common.utils.exception.BusinessException;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
-//@TableName()
+@TableName(value = "user")
 public class User extends BaseEntity{
     private String username;
     private String password;
@@ -20,7 +23,9 @@ public class User extends BaseEntity{
     private String phone;
     private String avatar;
     private String signature;
-    private String space_cover;
+    @TableField(value = "space_cover")
+    private String spaceCover;
+    @TableField(value = "is_admin")
     private Boolean isAdmin = Boolean.FALSE;
 
     public void setPassword(String password) {
