@@ -22,7 +22,7 @@ public class ServiceFactory {
 
 
 
-    private static ConcurrentHashMap<Class<?>, Object> serviceMap = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Class<?>, Object> serviceMap = new ConcurrentHashMap<>();
 
     private static UserService getUserService() {
         if (userService == null) {
