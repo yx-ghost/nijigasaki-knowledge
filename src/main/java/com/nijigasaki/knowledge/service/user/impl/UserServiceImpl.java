@@ -10,4 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends BaseService<UserMapper, User> implements UserService {
 
+    @Override
+    public String doLogin(String username, String password) {
+        return null;
+    }
 }
