@@ -51,7 +51,7 @@ public class JwtTokenUtil {
     // 生成 token
     public static String generateToken(UserLoginDTO userLoginDTO) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userLoginDTO.getUsername());
+        return doGenerateToken(claims, userLoginDTO.getPhone());
     }
 
     // 根据传入的信息生成 token
@@ -71,6 +71,6 @@ public class JwtTokenUtil {
     // 验证 token 是否有效
     public static Boolean validateToken(String token, UserLoginDTO userLoginDTO) {
         final String username = getUsernameFromToken(token);
-        return (username.equals(userLoginDTO.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userLoginDTO.getPhone()) && !isTokenExpired(token));
     }
 }
