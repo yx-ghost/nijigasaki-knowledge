@@ -12,7 +12,7 @@ import org.springframework.beans.BeanUtils;
 @NoArgsConstructor
 @ToString
 public class UserRegisterDTO {
-    private String username;
+    private String nickname;
     private String password;
     private String phone;
 
