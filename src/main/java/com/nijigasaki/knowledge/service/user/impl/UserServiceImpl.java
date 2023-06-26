@@ -6,8 +6,10 @@ import com.nijigasaki.knowledge.mapper.UserMapper;
 import com.nijigasaki.knowledge.model.dto.UserLoginDTO;
 import com.nijigasaki.knowledge.model.dto.UserRegisterDTO;
 import com.nijigasaki.knowledge.model.entity.User;
+import com.nijigasaki.knowledge.model.vo.UserInfoVO;
 import com.nijigasaki.knowledge.service.BaseService;
 import com.nijigasaki.knowledge.service.user.UserService;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,15 @@ public class UserServiceImpl extends BaseService<UserMapper, User> implements Us
 
     @Override
     public Boolean logout(String username) {
+        return null;
+    }
+
+    @Override
+    public UserInfoVO getUserInfo(String token) {
+        // 1. 从token中解析出用户信息
+        String phone = JwtTokenUtil.getClaimFromToken(token, Claims::getSubject);
+        // 2. 根据phone去查询相关数据
+
         return null;
     }
 }

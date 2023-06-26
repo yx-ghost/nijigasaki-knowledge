@@ -4,6 +4,7 @@ import com.nijigasaki.knowledge.controller.BaseController;
 import com.nijigasaki.knowledge.model.dto.UserLoginDTO;
 import com.nijigasaki.knowledge.model.dto.UserRegisterDTO;
 import com.nijigasaki.knowledge.model.entity.User;
+import com.nijigasaki.knowledge.model.vo.UserInfoVO;
 import com.nijigasaki.knowledge.service.ServiceFactory;
 import com.nijigasaki.knowledge.service.user.UserService;
 import com.nijigasaki.knowledge.service.user.impl.UserServiceImpl;
@@ -20,6 +21,12 @@ public class UserController extends BaseController<User,UserService> {
     @ApiOperation("登录")
     public String login(@RequestBody UserLoginDTO userLoginDTO)  {
         return userService.doLogin(userLoginDTO);
+    }
+
+    @GetMapping("/getUserInfo")
+    @ApiOperation("获取用户相关数据")
+    public UserInfoVO getUserInfo(@RequestHeader("Authorization") String token) {
+        return userService.getUserInfo(token);
     }
 
     @PostMapping("/register")
