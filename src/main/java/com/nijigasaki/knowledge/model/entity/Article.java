@@ -21,6 +21,8 @@ public class Article extends BaseEntity{
     private Integer articleStatus;
     @TableField(value = "collection_id")
     private Long collectionId;
+    @TableField(value = "head_pic_url")
+    private String headPicUrl;
 
     public void setVisibility(Integer visibility) {
         this.visibility = visibility;
