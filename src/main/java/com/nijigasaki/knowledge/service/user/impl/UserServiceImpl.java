@@ -1,6 +1,8 @@
 package com.nijigasaki.knowledge.service.user.impl;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.nijigasaki.knowledge.common.utils.JwtTokenUtil;
 import com.nijigasaki.knowledge.mapper.UserMapper;
 import com.nijigasaki.knowledge.model.dto.UserLoginDTO;
@@ -56,7 +58,7 @@ public class UserServiceImpl extends BaseService<UserMapper, User> implements Us
         // 1. 从token中解析出用户信息
         String phone = JwtTokenUtil.getClaimFromToken(token, Claims::getSubject);
         // 2. 根据phone去查询相关数据
-
+        QueryWrapper<User> wrapper = Wrappers.query();
         return null;
     }
 }
