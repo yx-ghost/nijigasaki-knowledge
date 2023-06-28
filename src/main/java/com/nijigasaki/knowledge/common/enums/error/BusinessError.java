@@ -24,6 +24,8 @@ public enum BusinessError {
      * 用户信息相关异常
      */
     PHONE_NUMBER_FORMAT_ERROR("2001","用户电话号码格式错误"),
+    PHONE_NUMBER_EXIST("2002","电话号码已经被使用过"),
+    PASSWORD_ERROR("2003","密码错误")
     ;
     @Getter
     private String code;

@@ -20,6 +20,10 @@ public class RedisUtil {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
 
+    public RedisTemplate<String, Object> getRedisTemplate() {
+        return redisTemplate;
+    }
+
     /**
      * 缓存基本的对象，Integer、String、实体类等
      *

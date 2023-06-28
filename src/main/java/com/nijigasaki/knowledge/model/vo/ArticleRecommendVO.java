@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArticleRecommendVO {
+    private Long id;
     private String authorName;
     private String title;
     private Integer articleStatus;

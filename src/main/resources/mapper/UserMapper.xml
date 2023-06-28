@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nijigasaki.knowledge.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.nijigasaki.knowledge.model.entity.User">
+        <result column="id" property="id"/>
+        <result column="avatar" property="avatar"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_admin" property="isAdmin"/>
+        <result column="nickname" property="nickname"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <result column="remark" property="remark"/>
+        <result column="signature" property="signature"/>
+        <result column="space_cover" property="spaceCover"/>
+        <result column="status" property="status"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="username" property="username"/>
+    </resultMap>
+    
+    
+    <sql id="Base_Column_List">
+        id,
+        avatar,
+        create_by,
+        create_time,
+        is_admin,
+        nickname,
+        password,
+        phone,
+        remark,
+        signature,
+        space_cover,
+        status,
+        update_by,
+        update_time,
+        username
+    </sql>
+    <select id="checkLogin" resultType="com.nijigasaki.knowledge.model.entity.User">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        user
+        WHERE
+        phone = #{userLoginDTO.phone}
+        AND
+        password = #{userLoginDTO.password}
+        AND
+        status = 1
+    </select>
+</mapper>

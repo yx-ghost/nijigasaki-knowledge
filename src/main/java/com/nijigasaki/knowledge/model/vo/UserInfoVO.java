@@ -1,9 +1,12 @@
 package com.nijigasaki.knowledge.model.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.nijigasaki.knowledge.model.entity.Article;
+import com.nijigasaki.knowledge.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -25,4 +28,14 @@ public class UserInfoVO {
 
     // 动态相关数据
 
+
+
+    public UserInfoVO(User user){
+        BeanUtils.copyProperties(user,this);
+    }
+
+    public UserInfoVO convert(Article article) {
+
+        return this;
+    }
 }

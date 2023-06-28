@@ -4,6 +4,7 @@ import com.nijigasaki.knowledge.mapper.ArticleMapper;
 import com.nijigasaki.knowledge.mapper.UserMapper;
 import com.nijigasaki.knowledge.model.entity.Article;
 import com.nijigasaki.knowledge.model.entity.User;
+import com.nijigasaki.knowledge.model.vo.ArticleInfoVO;
 import com.nijigasaki.knowledge.model.vo.ArticleRecommendVO;
 import com.nijigasaki.knowledge.service.BaseService;
 import com.nijigasaki.knowledge.service.article.ArticleService;
@@ -18,6 +19,11 @@ import java.util.List;
 public class ArticleServiceImpl extends BaseService<ArticleMapper, Article> implements ArticleService {
     @Override
     public List<ArticleRecommendVO> recommend() {
+        return null;
+    }
+
+    @Override
+    public ArticleInfoVO getArticleInfo(Long id) {
         return null;
     }
 }
