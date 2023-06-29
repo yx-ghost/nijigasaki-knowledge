@@ -49,9 +49,9 @@ public class JwtTokenUtil {
     }
 
     // 生成 token
-    public static String generateToken(UserLoginDTO userLoginDTO) {
+    public static String generateToken(String subject) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userLoginDTO.getPhone());
+        return doGenerateToken(claims, subject);
     }
 
     // 根据传入的信息生成 token

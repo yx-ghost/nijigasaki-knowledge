@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -175,6 +172,16 @@ public class RedisUtil {
         return JSONArray.parseArray(s, clazz);
     }
 
+    public <T> List<T> getList(final String key, final Class<T> clazz,final T value,long size) {
+        Long index = redisTemplate.opsForList().indexOf(key, value);
+        if (Objects.nonNull(index) && index != -1) {
+            List<Object> objectList = redisTemplate.opsForList().range(key, index, index+size);
+            String s = JSONArray.toJSONString(objectList);
+            return JSONArray.parseArray(s, clazz);
+        }
+        throw new BusinessException(BusinessError.REDIS_GET_DATA_FAILED);
+    }
+
     /**
      * 缓存Set
      *
@@ -247,8 +254,15 @@ public class RedisUtil {
      * @param hKeys Hash键集合
      * @return Hash对象集合
      */
-    public List getMap(final String key, final Collection<Object> hKeys) {
-        return redisTemplate.opsForHash().multiGet(key, hKeys);
+    public <T> List<T> getMap(final String key, final Collection<Object> hKeys,final Class<T> tClass) {
+        List<Object> list = redisTemplate.opsForHash().multiGet(key, hKeys);
+        List<T> tList = new ArrayList<>();
+
+        list.forEach(e->{
+            T t = (T) e;
+            tList.add(t);
+        });
+        return tList;
     }
 
     /**
@@ -259,5 +273,9 @@ public class RedisUtil {
      */
     public Collection<String> keys(final String pattern) {
         return redisTemplate.keys(pattern);
+    }
+
+    public Boolean exist(final String key) {
+        return redisTemplate.hasKey(key);
     }
 }

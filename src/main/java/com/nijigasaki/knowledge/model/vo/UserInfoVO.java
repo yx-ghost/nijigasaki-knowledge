@@ -34,6 +34,12 @@ public class UserInfoVO {
         BeanUtils.copyProperties(user,this);
     }
 
+    public User convertToUser() {
+        User user  = new User();
+        BeanUtils.copyProperties(this,user);
+        return user;
+    }
+
     public UserInfoVO convert(Article article) {
 
         return this;

@@ -7,10 +7,7 @@ import com.nijigasaki.knowledge.service.article.ArticleService;
 import com.nijigasaki.knowledge.service.article.impl.ArticleServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +19,9 @@ public class ArticleController {
 
     @GetMapping("/recommend")
     @ApiOperation("获取首页推荐文章")
-    public List<ArticleRecommendVO> recommend() {
-        return articleService.recommend();
+    public List<ArticleRecommendVO> recommend(@RequestHeader(value = "Authorization",required = false)String token,
+                                              Long lastArticleId) {
+        return articleService.recommend(token,lastArticleId);
     }
 
     @GetMapping("/article/{id}")

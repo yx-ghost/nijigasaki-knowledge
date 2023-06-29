@@ -42,7 +42,7 @@ public class UserServiceImpl extends BaseService<UserMapper, User> implements Us
             throw new BusinessException(BusinessError.PASSWORD_ERROR);
 
         }
-        return JwtTokenUtil.generateToken(userLoginDTO);
+        return JwtTokenUtil.generateToken(userLoginDTO.getPhone());
     }
 
     @Override

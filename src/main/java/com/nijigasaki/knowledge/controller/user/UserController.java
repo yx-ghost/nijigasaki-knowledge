@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "用户信息")
 public class UserController extends BaseController<User,UserService> {
 
-    private UserService userService = ServiceFactory.getService(UserServiceImpl.class);
+    private final UserService userService = ServiceFactory.getService(UserServiceImpl.class);
     @PostMapping("/login")
     @ApiOperation("登录")
     public String login(@RequestBody UserLoginDTO userLoginDTO)  {

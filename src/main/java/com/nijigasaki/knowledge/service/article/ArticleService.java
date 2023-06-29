@@ -6,7 +6,7 @@ import com.nijigasaki.knowledge.model.vo.ArticleRecommendVO;
 import java.util.List;
 
 public interface ArticleService {
-    List<ArticleRecommendVO> recommend();
+    List<ArticleRecommendVO> recommend(String token, Long lastArticleId);
 
     ArticleInfoVO getArticleInfo(Long id);
 }

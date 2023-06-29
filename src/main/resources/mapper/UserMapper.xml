@@ -43,8 +43,16 @@
         FROM
         user
         WHERE
-        phone = #{userLoginDTO.phone}
-        AND
+        <if test="userLoginDTO.phone != null and userLoginDTO.phone != ''">
+            phone = #{userLoginDTO.phone}
+            AND
+        </if>
+        <if test="userLoginDTO.adminId != null and userLoginDTO.adminId != ''">
+            username = #{userLoginDTO.adminId}
+            AND
+            is_admin &lt;&gt; 0
+            AND
+        </if>
         password = #{userLoginDTO.password}
         AND
         status = 1
