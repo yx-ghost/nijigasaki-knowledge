@@ -15,4 +15,7 @@ public class ArticleRecommendVO {
     private Integer articleStatus;
     private String desc;
     private String headPicUrl;
+
+    private Long favorites;
+    private Long likes;
 }
