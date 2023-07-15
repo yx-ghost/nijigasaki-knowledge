@@ -18,4 +18,14 @@ public enum Visibility {
         this.code = code;
         this.description = description;
     }
+
+    public static Visibility findByCode(int code) {
+        Visibility[] values = Visibility.values();
+        for (Visibility value : values) {
+            if (value.code == code) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

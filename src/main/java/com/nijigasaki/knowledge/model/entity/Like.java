@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 @ToString
-@TableName(value = "like")
+@TableName(value = "`like`")
 public class Like {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;

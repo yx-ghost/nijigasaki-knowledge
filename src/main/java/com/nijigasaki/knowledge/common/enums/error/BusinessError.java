@@ -25,7 +25,17 @@ public enum BusinessError {
      */
     PHONE_NUMBER_FORMAT_ERROR("2001","用户电话号码格式错误"),
     PHONE_NUMBER_EXIST("2002","电话号码已经被使用过"),
-    PASSWORD_ERROR("2003","密码错误")
+    PASSWORD_ERROR("2003","密码错误"),
+    /**
+     * 文章相关异常
+     */
+    ARTICLE_NOT_FOUND("2050","文章不存在"),
+
+    /**
+     * 枚举相关异常
+     */
+    VISIBILITY_NOT_FOUND("2100","错误的文章可见性"),
+    ARTICLE_STATUS_NOT_FOUND("2101","错误的文章状态")
     ;
     @Getter
     private String code;

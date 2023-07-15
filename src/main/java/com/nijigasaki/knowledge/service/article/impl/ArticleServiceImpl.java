@@ -1,16 +1,32 @@
 package com.nijigasaki.knowledge.service.article.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.nijigasaki.knowledge.common.consts.RedisConst;
+import com.nijigasaki.knowledge.common.enums.basic.ArticleStatus;
+import com.nijigasaki.knowledge.common.enums.basic.Status;
+import com.nijigasaki.knowledge.common.enums.basic.Visibility;
+import com.nijigasaki.knowledge.common.enums.error.BusinessError;
 import com.nijigasaki.knowledge.common.utils.RedisUtil;
+import com.nijigasaki.knowledge.common.utils.exception.BusinessException;
 import com.nijigasaki.knowledge.mapper.ArticleMapper;
 import com.nijigasaki.knowledge.model.entity.Article;
+import com.nijigasaki.knowledge.model.entity.ArticleCollection;
+import com.nijigasaki.knowledge.model.entity.ArticleContent;
 import com.nijigasaki.knowledge.model.entity.User;
 import com.nijigasaki.knowledge.model.vo.ArticleInfoVO;
 import com.nijigasaki.knowledge.model.vo.ArticleRecommendVO;
 import com.nijigasaki.knowledge.model.vo.UserInfoVO;
 import com.nijigasaki.knowledge.service.BaseService;
+import com.nijigasaki.knowledge.service.ServiceFactory;
+import com.nijigasaki.knowledge.service.article.ArticleContentService;
 import com.nijigasaki.knowledge.service.article.ArticleService;
+import com.nijigasaki.knowledge.service.article.FavoriteService;
+import com.nijigasaki.knowledge.service.article.LikeService;
+import com.nijigasaki.knowledge.service.message.CommentService;
+import com.nijigasaki.knowledge.service.message.impl.CommentServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +43,14 @@ public class ArticleServiceImpl extends BaseService<ArticleMapper, Article> impl
     RedisUtil redisUtil;
     @Autowired
     ArticleMapper articleMapper;
+    @Autowired
+    LikeService likeService;
+    @Autowired
+    FavoriteService favoriteService;
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    ArticleContentService articleContentService;
     @Override
     public List<ArticleRecommendVO> recommend(String token, Long lastArticleId) {
         // 1. 获取用户是否登录过
@@ -68,6 +92,39 @@ public class ArticleServiceImpl extends BaseService<ArticleMapper, Article> impl
 
     @Override
     public ArticleInfoVO getArticleInfo(Long id) {
-        return null;
+        // 1. 获取文章信息
+        QueryWrapper<Article> wrapper = Wrappers.query();
+        wrapper.eq("id",id)
+                .eq("status", Status.ACTIVE.getCode())
+                .eq("article_status", ArticleStatus.APPROVED.getCode());
+        Article article = articleMapper.selectOne(wrapper);
+        if (Objects.isNull(article)) {
+            throw new BusinessException(BusinessError.ARTICLE_NOT_FOUND);
+        }
+        ArticleInfoVO articleInfoVO = new ArticleInfoVO();
+        BeanUtils.copyProperties(article,articleInfoVO,"articleStatus","visibility");
+        articleInfoVO.setVisibility(article.getVisibility());
+        articleInfoVO.setArticleStatus(article.getArticleStatus());
+        ArticleContent articleContent = articleContentService.findByArticleId(id);
+        if (Objects.isNull(articleContent)) {
+            throw new BusinessException(BusinessError.ARTICLE_NOT_FOUND);
+        }
+        articleInfoVO.setContent(articleContent.getContent());
+        // 2. 获取点赞信息
+        Long likeCount = likeService.countByArticleId(id);
+        articleInfoVO.setLikes(likeCount);
+        // 3. 获取收藏数量
+        Long favoriteCount = favoriteService.countByArticleId(id);
+        articleInfoVO.setFavorites(favoriteCount);
+        // 4. 获取评论数量
+        Long commentCount = commentService.countByArticleId(id);
+        articleInfoVO.setComments(commentCount);
+        // 5. 获取合集名称
+        ArticleCollection articleCollection = ArticleCollection.getById(id);
+        if (Objects.nonNull(articleCollection)) {
+            articleInfoVO.setCollectionName(articleCollection.getName());
+        }
+
+        return articleInfoVO;
     }
 }

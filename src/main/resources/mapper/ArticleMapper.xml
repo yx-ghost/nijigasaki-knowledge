@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nijigasaki.knowledge.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.nijigasaki.knowledge.model.entity.Article">
+        <result column="id" property="id" />
+        <result column="created_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="remark" property="remark" />
+        <result column="status" property="status" />
+        <result column="author_name" property="authorName" />
+        <result column="title" property="title" />
+        <result column="visibility" property="visibility" />
+        <result column="article_status" property="articleStatus" />
+        <result column="collection_id" property="collectionId" />
+        <result column="head_pic_url" property="headPicUrl" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    
+    
+    <sql id="Base_Column_List">
+        id,
+        created_by,
+        create_time,
+        update_by,
+        remark,
+        status,
+        author_name,
+        title,
+        visibility,
+        article_status,
+        collection_id,
+        head_pic_url,
+        update_time
+    </sql>
+
+</mapper>

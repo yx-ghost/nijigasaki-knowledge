@@ -27,7 +27,7 @@ public class BaseEntity implements Serializable {
     /**
      * 创建人
      */
-    @TableField(value = "create_by", fill = FieldFill.INSERT)
+    @TableField(value = "created_by", fill = FieldFill.INSERT)
     private String createBy;
 
     /**

@@ -1,1 +1,11 @@
 ALTER TABLE article ADD COLUMN head_pic_url VARCHAR(255);
+
+----2023年7月15日
+ALTER TABLE article ADD COLUMN update_time DATETIME;
+ALTER TABLE `favorite` ADD COLUMN `status` tinyint(4) NOT NULL DEFAULT 1 AFTER `article_id`;
+CREATE TABLE `article_collection` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) DEFAULT NULL COMMENT '文章合集名称',
+  `username` varchar(255) DEFAULT NULL COMMENT '创建用户名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='文章合集表';

@@ -7,6 +7,7 @@ import com.nijigasaki.knowledge.service.article.ArticleService;
 import com.nijigasaki.knowledge.service.article.impl.ArticleServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/article")
 @Api("文章信息")
+@RequiredArgsConstructor
 public class ArticleController {
-    private ArticleService articleService = ServiceFactory.getService(ArticleServiceImpl.class);
+    final ArticleService articleService;
 
     @GetMapping("/recommend")
     @ApiOperation("获取首页推荐文章")

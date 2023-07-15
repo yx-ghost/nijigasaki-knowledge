@@ -16,4 +16,5 @@ public class Favorite {
     private String username;
     @TableField(value ="article_id")
     private Long articleId;
+    private Integer status;
 }

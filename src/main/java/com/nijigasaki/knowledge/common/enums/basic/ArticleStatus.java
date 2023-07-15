@@ -16,4 +16,14 @@ public enum ArticleStatus {
         this.code = code;
         this.description = description;
     }
+
+    public static ArticleStatus findByCode(int code) {
+        ArticleStatus[] values = ArticleStatus.values();
+        for (ArticleStatus value : values) {
+            if (value.code == code) {
+                return value;
+            }
+        }
+        return null;
+    }
 }
